@@ -1,8 +1,10 @@
+package model;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name="images")
-class Image {
+public class Image {
 
     @Id
     long imageId;

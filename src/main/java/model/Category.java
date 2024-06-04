@@ -1,13 +1,14 @@
+package model;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="tags")
-class Tag {
+@Table(name="categories")
+public class Category {
 
     @Id
-    long tagId;
-
+    long categoryId;
     String name;
 }

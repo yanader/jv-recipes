@@ -1,14 +1,15 @@
+package model;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="ingredients")
-public class Ingredient {
+@Table(name="tags")
+public class Tag {
 
     @Id
-    long ingredientId;
+    long tagId;
+
     String name;
-    int quantity;
-    String unitOfMeasurement;
 }
