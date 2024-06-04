@@ -2,8 +2,11 @@ package model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name="ingredients")
 public class Ingredient {
 

@@ -1,10 +1,13 @@
 package model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name="ratings")
 public class Rating {
 

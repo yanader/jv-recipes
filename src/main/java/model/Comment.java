@@ -2,10 +2,13 @@ package model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name ="comments")
 public class Comment {
 

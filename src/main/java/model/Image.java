@@ -1,8 +1,11 @@
 package model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name="images")
 public class Image {
 

@@ -3,12 +3,15 @@ package model;
 import jakarta.persistence.*;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name="recipes")
 public class Recipe {
 

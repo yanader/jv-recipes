@@ -1,8 +1,11 @@
 package model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name="categories")
 public class Category {
 

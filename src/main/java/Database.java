@@ -37,6 +37,17 @@ public class Database {
     }
 
     public static void seed() {
+        var sessionFactory = getSessionFactory();
 
+        sessionFactory.inTransaction(session -> {
+            session.persist(new Tag("Pasta"));
+            session.persist(new Tag("Vegan"));
+            session.persist(new Tag("Sweet"));
+        });
+
+        sessionFactory.inTransaction(session -> {
+            Tag t = session.find(Tag.class, 1L);
+            System.out.println(t.getName());
+        });
     }
 }
