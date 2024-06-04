@@ -2,6 +2,9 @@ import model.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import static java.lang.Boolean.TRUE;
 
 import static org.hibernate.cfg.JdbcSettings.*;
@@ -39,15 +42,74 @@ public class Database {
     public static void seed() {
         var sessionFactory = getSessionFactory();
 
+        seedTags(sessionFactory);
+        seedUsers(sessionFactory);
+        seedIngredients(sessionFactory);
+//        seedRecipes(sessionFactory);
+//        seedRatings(sessionFactory);
+
+        showAllInTable(sessionFactory, Tag.class);
+        showAllInTable(sessionFactory, User.class);
+        showAllInTable(sessionFactory, Ingredient.class);
+
+
+    }
+
+    private static void seedTags(SessionFactory sessionFactory) {
         sessionFactory.inTransaction(session -> {
             session.persist(new Tag("Pasta"));
             session.persist(new Tag("Vegan"));
             session.persist(new Tag("Sweet"));
-        });
-
-        sessionFactory.inTransaction(session -> {
-            Tag t = session.find(Tag.class, 1L);
-            System.out.println(t.getName());
+            session.flush();
         });
     }
+
+    private static void showAllInTable(SessionFactory sessionFactory, Class passedClass) {
+        sessionFactory.inTransaction(session -> {
+            List<Tag> list = session.createQuery("from " + passedClass.getSimpleName(), passedClass).list();
+
+            for (Object o : list) {
+                System.out.println(o);
+            }
+        });
+    }
+
+    private static void seedUsers(SessionFactory sessionFactory) {
+        sessionFactory.inTransaction(session -> {
+            session.persist(new User("ste", "email", "password", LocalDate.now()));
+            session.persist(new User("Joy", "lovely email", "tinypassword", LocalDate.now()));
+            session.persist(new User("croc", "crocMail", "megaSecure", LocalDate.now()));
+            session.flush();
+        });
+    }
+
+    private static void seedIngredients(SessionFactory sessionFactory) {
+        sessionFactory.inTransaction(session -> {
+            session.persist(new Ingredient("peppers", 3, "Unit"));
+            session.persist(new Ingredient("Flour", 200, "Grams"));
+            session.persist(new Ingredient("Eggs", 6, "Unit"));
+            session.flush();
+        });
+    }
+
+//    private static void seedRecipes(SessionFactory sessionFactory) {
+//        sessionFactory.inTransaction(session -> {
+//            var user = session.find(User.class, 1L);
+//            session.persist(new Recipe("Egg", "It's an egg", "Cook an egg", 1,
+//                    8, 1, "Easy", user, LocalDate.now(), LocalDate.now()));
+//            session.flush();
+//        });
+//    }
+//
+//    private static void seedRatings(SessionFactory sessionFactory) {
+//        sessionFactory.inTransaction(session -> {
+//            var recipe = session.find(Recipe.class, 1L);
+//            var user = session.find(User.class, 2L);
+//            Rating rating = new Rating(5, LocalDate.now(), recipe, user);
+//            session.persist(rating);
+//            session.flush();
+//            System.out.println("persisted rating: " + rating);
+//
+//        });
+//    }
 }
