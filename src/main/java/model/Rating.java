@@ -9,6 +9,7 @@ import java.time.LocalDate;
 public class Rating {
 
     @Id
+    @GeneratedValue
     long ratingID;
     int ratingOutOfFive;
     LocalDate dateRated;

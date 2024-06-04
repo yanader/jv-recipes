@@ -12,6 +12,7 @@ import java.util.List;
 public class Recipe {
 
     @Id
+    @GeneratedValue
     long recipeId;
 
     @NotNull

@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class Image {
 
     @Id
+    @GeneratedValue
     long imageId;
     String fileName;
     String fileData;
