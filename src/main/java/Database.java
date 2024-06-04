@@ -35,4 +35,8 @@ public class Database {
 
         return sessionFactory;
     }
+
+    public static void seed() {
+
+    }
 }

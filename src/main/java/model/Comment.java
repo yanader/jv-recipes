@@ -21,4 +21,11 @@ public class Comment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     Recipe associatedRecipe;
+
+    public Comment(String text, LocalDate datePosted, User author, Recipe associatedRecipe) {
+        this.text = text;
+        this.datePosted = datePosted;
+        this.author = author;
+        this.associatedRecipe = associatedRecipe;
+    }
 }

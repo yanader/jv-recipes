@@ -14,4 +14,10 @@ public class Ingredient {
     String name;
     int quantity;
     String unitOfMeasurement;
+
+    public Ingredient(String name, int quantity, String unitOfMeasurement) {
+        this.name = name;
+        this.quantity = quantity;
+        this.unitOfMeasurement = unitOfMeasurement;
+    }
 }

@@ -15,4 +15,8 @@ public class Tag {
     long tagId;
     @NotNull
     String name;
+
+    public Tag(String name) {
+        this.name = name;
+    }
 }

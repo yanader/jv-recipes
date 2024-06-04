@@ -10,4 +10,8 @@ public class Category {
     @GeneratedValue
     long categoryId;
     String name;
+
+    public Category(String name) {
+        this.name = name;
+    }
 }

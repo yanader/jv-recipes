@@ -20,5 +20,10 @@ public class Rating {
     @ManyToOne(fetch = FetchType.LAZY)
     User rater;
 
-
+    public Rating(int ratingOutOfFive, LocalDate dateRated, Recipe associatedRecipe, User rater) {
+        this.ratingOutOfFive = ratingOutOfFive;
+        this.dateRated = dateRated;
+        this.associatedRecipe = associatedRecipe;
+        this.rater = rater;
+    }
 }

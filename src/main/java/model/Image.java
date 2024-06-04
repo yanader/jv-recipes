@@ -13,4 +13,10 @@ public class Image {
     String fileData;
     @ManyToOne(fetch = FetchType.LAZY)
     Recipe associatedRecipe;
+
+    public Image(String fileName, String fileData, Recipe associatedRecipe) {
+        this.fileName = fileName;
+        this.fileData = fileData;
+        this.associatedRecipe = associatedRecipe;
+    }
 }
