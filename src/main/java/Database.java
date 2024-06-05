@@ -15,7 +15,6 @@ public class Database {
         var sessionFactory = new Configuration()
                 .addAnnotatedClass(Recipe.class)
                 .addAnnotatedClass(User.class)
-                .addAnnotatedClass(Rating.class)
                 .addAnnotatedClass(Ingredient.class)
                 .addAnnotatedClass(Category.class)
                 .addAnnotatedClass(Comment.class)
@@ -45,14 +44,12 @@ public class Database {
         seedTags(sessionFactory);
         seedUsers(sessionFactory);
         seedIngredients(sessionFactory);
-//        seedRecipes(sessionFactory);
-//        seedRatings(sessionFactory);
+        seedRecipes(sessionFactory);
 
         showAllInTable(sessionFactory, Tag.class);
         showAllInTable(sessionFactory, User.class);
         showAllInTable(sessionFactory, Ingredient.class);
-
-
+        showAllInTable(sessionFactory, Recipe.class);
     }
 
     private static void seedTags(SessionFactory sessionFactory) {
@@ -66,7 +63,7 @@ public class Database {
 
     private static void showAllInTable(SessionFactory sessionFactory, Class passedClass) {
         sessionFactory.inTransaction(session -> {
-            List<Tag> list = session.createQuery("from " + passedClass.getSimpleName(), passedClass).list();
+            List<?> list = session.createQuery("from " + passedClass.getSimpleName(), passedClass).list();
 
             for (Object o : list) {
                 System.out.println(o);
@@ -92,24 +89,11 @@ public class Database {
         });
     }
 
-//    private static void seedRecipes(SessionFactory sessionFactory) {
-//        sessionFactory.inTransaction(session -> {
-//            var user = session.find(User.class, 1L);
-//            session.persist(new Recipe("Egg", "It's an egg", "Cook an egg", 1,
-//                    8, 1, "Easy", user, LocalDate.now(), LocalDate.now()));
-//            session.flush();
-//        });
-//    }
-//
-//    private static void seedRatings(SessionFactory sessionFactory) {
-//        sessionFactory.inTransaction(session -> {
-//            var recipe = session.find(Recipe.class, 1L);
-//            var user = session.find(User.class, 2L);
-//            Rating rating = new Rating(5, LocalDate.now(), recipe, user);
-//            session.persist(rating);
-//            session.flush();
-//            System.out.println("persisted rating: " + rating);
-//
-//        });
-//    }
+    private static void seedRecipes(SessionFactory sessionFactory) {
+        sessionFactory.inTransaction(session -> {
+            User user = session.find(User.class, 1L);
+            session.persist(new Recipe("Egg", user));
+            session.flush();
+        });
+    }
 }

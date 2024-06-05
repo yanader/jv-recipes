@@ -28,10 +28,8 @@ public class Recipe {
     int servings;
     String difficulty;
 
-    @OneToMany(mappedBy="ratingID")
-    List<Rating> ratings;
-
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "creator_id", nullable = false)
     User creator;
 
     @OneToMany(mappedBy="ingredientId")
@@ -43,19 +41,10 @@ public class Recipe {
     LocalDate created;
     LocalDate lastModified;
 
-    public Recipe(String title, String description, String instructions, int preparationTime, int cookingTime, int servings, String difficulty, User creator, LocalDate created, LocalDate lastModified) {
+    public Recipe(String title, User creator) {
         this.title = title;
-        this.description = description;
-        this.instructions = instructions;
-        this.preparationTime = preparationTime;
-        this.cookingTime = cookingTime;
-        this.servings = servings;
-        this.difficulty = difficulty;
-        this.ratings = new ArrayList<>();
         this.creator = creator;
         this.ingredientList = new ArrayList<>();
         this.categoryList = new ArrayList<>();
-        this.created = created;
-        this.lastModified = lastModified;
     }
 }
